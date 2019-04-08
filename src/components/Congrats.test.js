@@ -3,15 +3,19 @@ import Enzyme, { shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
 import Congrats from "./Congrats";
-import { findByTestAttr } from "../../test/Utils";
+import { findByTestAttr, checkProps } from "../../test/Utils";
 
 Enzyme.configure({ adapter: new Adapter() });
+
+const defaultProps = { success: false };
+
 /**
  * Function to create a shallow wrapper of congrats component
  * @param {Object} props - Props for Congrats component
  */
 const setup = (props = {}) => {
-  return shallow(<Congrats {...props} />);
+  const setupProps = { ...defaultProps, ...props };
+  return shallow(<Congrats {...setupProps} />);
 };
 
 describe("Congrats component", () => {
@@ -29,5 +33,9 @@ describe("Congrats component", () => {
     const wrapper = setup({ success: true });
     const message = findByTestAttr(wrapper, "congrats-message");
     expect(message.text().length).not.toBe(0);
+  });
+  test("do not throw warning with expected property", () => {
+    const expectedProps = { success: true };
+    checkProps(Congrats, expectedProps);
   });
 });
