@@ -1,14 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
 
 import "./styles.css";
+import GuessedWords from "./components/guessedWords/GuessedWords";
+import Congrats from "./components/Congrats/Congrats";
+import store from "./store";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <h1>Jotto Testing</h1>
+        <Congrats success={true} />
+        <GuessedWords
+          guessedWords={[{ guessedWord: "train", letterMatchCount: 3 }]}
+        />
+      </div>
+    </Provider>
   );
 }
 

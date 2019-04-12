@@ -10,7 +10,7 @@ const GuessedWords = props => {
   } else {
     const guessedWords = props.guessedWords.map((word, index) => (
       <tr data-test="guessed-word" key={index}>
-        <td>{word.guessedWords}</td>
+        <td>{word.guessedWord}</td>
         <td>{word.letterMatchCount}</td>
       </tr>
     ));
